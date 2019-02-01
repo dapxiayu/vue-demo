@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="./vue.js"></script>
+
+    <style>
+
+
+    /* 进入动画 从0 到1   */
+    .fade-enter {
+        opacity: 0;
+    }
+    .fade-enter-active {
+        transition: all  3s ease-in-out;
+
+    }
+
+    /* 离开动画 从1到0   */
+    .fade-leave-to {
+        opacity: 0;
+    }
+    .fade-leave-active {
+        transition :all 3s ease-in-out;
+    }
+
+    
+    
+    </style>
+</head>
+
+<body>
+    <div id="app">
+
+        <transition name=fade>
+            <div v-show="flag">hello world</div>
+        </transition>
+        <button @click="change">点击切换</button>
+
+    </div>
+
+    <script>
+        let vm = new Vue({
+            el: "#app",
+            data: {
+                flag: true,
+            },
+            methods: {
+                change(){
+                    this.flag=!this.flag
+                }
+            },
+        
+        })
+    </script>
+</body>
+
+</html>

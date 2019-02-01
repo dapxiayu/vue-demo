@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>非父子组件传值(Bus/总线/发布订阅/观察者模式)</title>
+
+    <script src="./vue.js"></script>
+</head>
+<body>
+    <div id="app">
+        <child content="hello"></child>
+        <child content="world"></child>
+
+    </div>
+    <script>
+
+        Vue.prototype.busss=new Vue();   //在Vued的原型上绑定bus属性,那么每一个new Vue() 对象上都有一个bus 属性
+
+        Vue.component("child",{
+            props:{
+                content:String
+            },
+
+            data(){
+                return {
+                  msg:this.content
+                }
+            },
+            template:"<div @click='handel' >{{msg}}</div>",
+            methods:{
+                handel(){
+                    this.busss.$emit('change',this.msg)   // 使用实例对象上的bus属性对外发送事件
+                }
+            },
+            mounted() {
+               this.busss.$on('change',(val)=>{      // 这里使用实例上的bus属性监听传递过来的事件
+                   console.log(val)
+                this.msg=val
+               }) 
+            },
+        })
+    let vm=new Vue({
+        el:'#app',
+        data:{},
+    })
+    
+    </script>
+</body>
+</html>

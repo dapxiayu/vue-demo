@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+
+    <script src="./vue.js"></script>
+
+    <style>
+    
+    .v-enter{
+        opacity: 0;
+    }
+    .v-enter-active {
+        transition: all 2s ;
+    }
+    .v-leave-to {
+        opacity: 0;
+    }
+    .v-leave-active {
+        transition: all 2s ;
+
+    }
+    </style>
+</head>
+
+<body>
+
+    <div id="app">
+
+        <h3>给元素增加key  默认Vue会复用dom 元素，给元素增加key 实现dom 元素唯一性 </h3>
+        <transition mode='out-in'>
+            <p v-if="flag" key='hello'>hello world</p>
+            <p v-else key='bye'> bye world</p>
+        </transition>
+        <button @click="change">点击切换</button>
+    </div>
+    <script>
+        let vm = new Vue({
+            el: '#app',
+            data: {
+                flag: true
+            },
+            methods: {
+                change() {
+                    this.flag = !this.flag
+                }
+
+            },
+
+
+        })
+    </script>
+</body>
+
+</html>

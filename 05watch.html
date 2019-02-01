@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="./vue.js"></script>
+</head>
+<body>
+    <div id="app">
+        {{full}}
+        <div>{{msg}}</div>
+    </div>
+    <script>
+    let vm=new Vue({
+        el:"#app",
+        data:{
+            first:'你',
+            last:'好',
+            msg:'hello world',
+            full:'你 好'
+
+        },
+
+        watch:{
+            first(){
+                console.log('计算了一次')
+                this.full=this.first+this.last
+            },
+            last(){
+                console.log('计算了一次')
+                this.full=this.first+this.last
+
+            }
+
+        },
+       
+        methods:{
+            change(){
+                setTimeout(()=>{
+                    this.msg="我要改变"
+                },2000)
+                
+            }
+        },
+        mounted() {
+            this.change()
+        },
+
+    })
+    </script>
+</body>
+</html>

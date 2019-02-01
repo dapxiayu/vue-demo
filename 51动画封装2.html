@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+
+    <script src="./vue.js"></script>
+
+    <style>
+    
+    /* .v-enter,.v-leave-to {
+        opacity: 0;
+    }
+    .v-enter-active,.v-leave-active {
+        transition: all 2s;
+    } */
+    </style>
+</head>
+
+
+<body>
+    <div id="app">
+            <fade :flags=flag>
+                    <div>hello world</div>
+
+            </fade>
+            <fade :flags=flag>
+                    <div>你好</div>
+
+            </fade>
+       
+       
+        <button @click="change">点击切换</button>
+    </div>
+    <script>
+        Vue.component('fade',{
+            props:['flags'],
+            template:
+            ` <transition 
+            @before-enter="beforeEnter"
+            @enter="Enter"
+            @after-enter="afterEnter"
+            >
+                    <slot v-if="flags"></slot>
+
+                </transition>
+            `,
+            methods:{
+                beforeEnter(el){
+                    el.style.color='red'
+                },
+                Enter(el,done){
+                   setTimeout(() => {
+                    el.style.fontSize='40px';
+                    el.style.backgroundColor='black';
+                    
+                   },1000);
+                   setTimeout(()=>{
+                       done()
+                   },2000)
+                },
+                afterEnter(el){
+                    console.log('动画结束')
+                    el.style.fontSize='16px';
+                    el.style.backgroundColor='';
+                }
+            }
+        })
+
+
+        let vm=new Vue({
+            el:'#app',
+            data:{
+                flag:true,
+            },
+            methods: {
+              change(){
+                  this.flag=!this.flag
+              }  
+            },
+        })
+    </script>
+</body>
+</html>

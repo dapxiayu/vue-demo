@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="./vue.js"></script>
+</head>
+
+<body>
+
+    <div id="app">
+
+    </div>
+    <script>
+     let vm=new Vue({
+         el:"#app",
+         template:"<p>{{this.msg}}</p>",
+         data:{
+              msg:'hello world',
+              msg2:'我需要改变'
+         },
+         beforeCreate() {
+             console.log('beforeCreate')
+         },
+         created() {
+           console.log('created'); 
+           console.log(this.$el);
+      
+         },
+         beforeMount() {
+             console.log('beforeMount')
+     
+
+         },
+         mounted() {
+             console.log('mounted')
+             console.log(this.$el)
+            
+         },
+         beforeDestroy() {
+             console.log('beforeDestroy')
+
+         },
+         destroyed() {
+             console.log('destroyed')
+         },
+         beforeUpdate() {
+             console.log('beforeUpdate')
+         },
+         updated() {
+            console.log('updated') 
+
+         },
+
+     })
+
+   
+
+    </script>
+</body>
+
+</html>
